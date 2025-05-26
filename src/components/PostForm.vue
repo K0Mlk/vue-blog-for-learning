@@ -1,20 +1,31 @@
 <script setup>
 import { ref } from 'vue';
 
+const props = defineProps({
+    posts: Array
+});
+
+const emit = defineEmits(['create']);
+
 let title = ref('');
 let body = ref('');
+let postTime = ref(Date.now());
 
 function createPost() {
-  
   let newPost = {
-    // id: 3,
     title: title.value,
-    time: postTime,
+    time: postTime.value,
     body: body.value
   };
-
-  return posts.value.push(newPost);   
+  
+  emit('create', newPost);
+  
+  // Очищаем поля после создания
+  title.value = '';
+  body.value = '';
 }
+
+
 </script>
 
 

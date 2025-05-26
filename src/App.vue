@@ -29,23 +29,22 @@ let posts = ref([
   }  
 ]);
 
-// function createPost() {
-  
-//   let newPost = {
-//     // id: 3,
-//     title: title.value,
-//     time: postTime,
-//     body: body.value
-//   };
+const addPost = (newPost) => {
+  posts.value.push({
+    ...newPost,
+    time: Date.now()
+  });
+};
 
-//   return posts.value.push(newPost);   
-// }
 </script>
 
 
 <template>
   <div class="app">
-    <PostForm />
+    <PostForm
+      :posts="posts"
+      @create="addPost"
+    />
     <PostList
       v-for="post in posts"
       :title="post.title"
